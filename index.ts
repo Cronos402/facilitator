@@ -60,7 +60,7 @@ interface RateLimitEntry {
     resetTime: number;
 }
 
-const USER_AGENT = "facilitator-proxy-mcpay.tech/1.0";
+const USER_AGENT = "facilitator-proxy-cronos402.dev/1.0";
 
 class FacilitatorProxy {
     private config: ProxyConfig;
@@ -790,13 +790,13 @@ app.get("/", async (c) => {
     <div class="endpoint">
         <h3>Example Usage</h3>
         <p>Check proxy health:</p>
-        <div class="code">curl https://facilitator.mcpay.tech/health</div>
-        
+        <div class="code">curl https://facilitator-api.cronos402.dev/health</div>
+
         <p>Get detailed status:</p>
-        <div class="code">curl https://facilitator.mcpay.tech/status</div>
-        
+        <div class="code">curl https://facilitator-api.cronos402.dev/status</div>
+
         <p>Proxy a request to facilitators:</p>
-        <div class="code">curl https://facilitator.mcpay.tech/v2/x402/supported</div>
+        <div class="code">curl https://facilitator-api.cronos402.dev/v2/x402/supported</div>
     </div>
 
     <div class="footer">
