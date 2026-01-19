@@ -325,12 +325,15 @@ class FacilitatorProxy {
             return { target, isHealthy };
         });
 
-        const results = await Promise.all(healthCheckPromises);
+        // Use Promise.allSettled to prevent single failure from crashing everything
+        const results = await Promise.allSettled(healthCheckPromises);
 
-        // Return only healthy targets
+        // Return only healthy targets from fulfilled promises
         return results
-            .filter(({ isHealthy }) => isHealthy)
-            .map(({ target }) => target);
+            .filter((result): result is PromiseFulfilledResult<{ target: UpstreamTarget; isHealthy: boolean }> =>
+                result.status === 'fulfilled' && result.value.isHealthy
+            )
+            .map(result => result.value.target);
     }
 
     private async selectTarget(): Promise<UpstreamTarget | null> {
@@ -605,6 +608,12 @@ const proxy = new FacilitatorProxy();
 
 // Create Hono app
 const app = new Hono();
+
+// Global error handler - prevents server crashes
+app.onError((err, c) => {
+    console.error('[Facilitator] Unhandled error:', err);
+    return c.json({ error: err.message || 'Internal server error' }, 500);
+});
 
 // Security headers middleware
 app.use("*", async (c, next) => {
@@ -893,4 +902,15 @@ app.get("/metrics", async (c) => {
 const server = serve({
     fetch: app.fetch,
     port: 3004,
+});
+
+// Process error handlers - log but don't crash
+process.on('unhandledRejection', (reason, promise) => {
+    console.error('[Facilitator] Unhandled Rejection:', reason);
+});
+
+process.on('uncaughtException', (error) => {
+    console.error('[Facilitator] Uncaught Exception:', error);
+    // Exit gracefully on uncaught exceptions
+    process.exit(1);
 });
