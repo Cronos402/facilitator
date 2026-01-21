@@ -12,8 +12,6 @@ High-availability passthrough proxy for x402 facilitators with automatic failove
 ## Upstream Targets
 
 - `facilitator.cronoslabs.org` (Cronos official)
-- `facilitator.x402.rs`
-- `facilitator.payai.network`
 
 ## API Endpoints
 

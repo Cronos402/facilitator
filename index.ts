@@ -789,13 +789,13 @@ app.get("/", async (c) => {
     <div class="endpoint">
         <h3>Example Usage</h3>
         <p>Check proxy health:</p>
-        <div class="code">curl https://facilitator-api.cronos402.dev/health</div>
+        <div class="code">curl https://facilitator.cronos402.dev/health</div>
 
         <p>Get detailed status:</p>
-        <div class="code">curl https://facilitator-api.cronos402.dev/status</div>
+        <div class="code">curl https://facilitator.cronos402.dev/status</div>
 
         <p>Proxy a request to facilitators:</p>
-        <div class="code">curl https://facilitator-api.cronos402.dev/v2/x402/supported</div>
+        <div class="code">curl https://facilitator.cronos402.dev/v2/x402/supported</div>
     </div>
 
     <div class="footer">
