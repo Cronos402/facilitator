@@ -76,16 +76,6 @@ class FacilitatorProxy {
                     url: "https://facilitator.cronoslabs.org",
                     weight: 10, // Primary - Cronos official facilitator
                 },
-                {
-                    name: "facilitator.x402.rs",
-                    url: "https://facilitator.x402.rs",
-                    weight: 0.5,
-                },
-                {
-                    name: "facilitator.payai.network",
-                    url: "https://facilitator.payai.network",
-                    weight: 0.5,
-                },
             ],
             retry: {
                 maxRetries: 3,
