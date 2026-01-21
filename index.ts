@@ -292,7 +292,7 @@ class FacilitatorProxy {
             // Validate the response
             const isValid = await this.validateResponse(response);
 
-            if (response.status < 500 && isValid) {
+            if (response.status >= 200 && response.status < 300 && isValid) {
                 this.recordSuccess(target.name);
                 console.log(`Health check passed for ${target.name} (${response.status})`);
                 return true;
@@ -805,6 +805,11 @@ app.get("/", async (c) => {
 </body>
 </html>
   `);
+});
+
+// Favicon handler - don't proxy to upstream
+app.get("/favicon.ico", async (c) => {
+    return c.body(null, 204); // No Content
 });
 
 // Proxy all other requests
